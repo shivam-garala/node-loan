@@ -24,12 +24,12 @@ const controller = () => {
                     success: false
                   });
                 }
-                const { email, password } = req.body;
-                let user = await User.findOne({ where: { email } });
+                const { mobile_number, password } = req.body;
+                let user = await User.findOne({ where: { mobile_number } });
                 if (!user) {
                   return res.status(400).json({
                     success: false,
-                    message: "You have not registered with this email. Please contact your administrator.",
+                    message: "You have not registered with this mobile number. Please contact your administrator.",
                   });
                 }
                 const comparePassword = await bcrypt.compare(password, user.dataValues.password);
@@ -48,7 +48,7 @@ const controller = () => {
                 const authToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '24h' });
 
                 // add user token
-                await User.update({ auth_token: authToken }, { where: { email } });
+                await User.update({ auth_token: authToken }, { where: { mobile_number } });
                 res.cookie("authorization", `Bearer ${authToken}`).status(200).json({
                   success: true,
                   authToken,
@@ -75,7 +75,7 @@ const controller = () => {
               const salt = await bcrypt.genSalt(10);
               const securedPassword = await bcrypt.hash(req.body.password, salt);
               const data = {
-                email: req.body.email.trim(),
+                mobile_number: req.body.mobile_number.trim(),
                 password: securedPassword,
               };
               
@@ -87,7 +87,7 @@ const controller = () => {
                 .json({
                   success: true,
                   message: "User created successfully",
-                  data: { email: mydata.email },
+                  data: { mobile_number: mydata.mobile_number },
                 });
             } catch (error) {
               console.log(error);

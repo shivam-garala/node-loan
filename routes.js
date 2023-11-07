@@ -9,7 +9,7 @@ const { body } = require("express-validator");
 Router.post(
     "/login",
     [
-      body("email", "Email can not be blank").exists(),
+      body("mobile_number", "Mobile number can not be blank").exists(),
   
       body("password", "Password can not be blank").exists()
     ],
@@ -17,14 +17,14 @@ Router.post(
   );
 
 Router.post("/",  [
-    body("email").custom((value) => {
+    body("mobile_number").custom((value) => {
       if (!value) {
-        return Promise.reject("Enter email");
+        return Promise.reject("Enter mobile number");
       }
       value = value.trim();
-      return User.findOne({ where: { email: value } }).then((user) => {
+      return User.findOne({ where: { mobile_number: value } }).then((user) => {
         if (user) {
-          return Promise.reject("This email is already in use");
+          return Promise.reject("This mobile number is already in use");
         }
       });
     }),
