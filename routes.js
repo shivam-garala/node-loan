@@ -16,7 +16,7 @@ Router.post(
     controller().userLogin
   );
 
-Router.post("/",  [
+Router.post("/createUser",  [
     body("mobile_number").custom((value) => {
       if (!value) {
         return Promise.reject("Enter mobile number");
@@ -30,5 +30,6 @@ Router.post("/",  [
     }),
   ], controller().createUser);
 
+Router.post("/addForm",  controller().createForm);
 
 module.exports = Router;

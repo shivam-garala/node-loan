@@ -4,6 +4,7 @@ require("dotenv").config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require("express-validator");
+const UserForm = require('./Models/UserForm');
 
 
 const controller = () => {
@@ -93,7 +94,43 @@ const controller = () => {
               console.log(error);
               res.status(400).json({ message: "Bad request", success: false });
             }
+        },
+        createForm: async (req, res) => {
+          try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+              const error = errors.array().map((x) => {
+                return { field: x.param, message: x.msg };
+              });
+              return res.status(409).json({ error, success: false });
+            }
+        
+            const data = {
+              user_id: req.body.user_id,
+              amount: req.body.amount,
+              disbursal: req.body.disbursal,
+              interest: req.body.interest,
+              repayment: req.body.repayment,
+              service_charge: req.body.service_charge,
+              received_amount: req.body.received_amount,
+              gst: req.body.gst
+            };
+            
+            const mydata = await UserForm.create(data);
+           
+    
+            res
+              .status(200)
+              .json({
+                success: true,
+                message: "Form added successfully",
+                mydata
+              });
+          } catch (error) {
+            console.log(error);
+            res.status(400).json({ message: "Bad request", success: false });
           }
+      }
     };
   };
   module.exports = controller;
