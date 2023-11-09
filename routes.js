@@ -32,4 +32,6 @@ Router.post("/createUser",  [
 
 Router.post("/addForm",  controller().createForm);
 
+Router.get("/loanAmount/:user_id",  controller().getLoanAmount);
+
 module.exports = Router;

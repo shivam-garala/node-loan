@@ -113,7 +113,8 @@ const controller = () => {
               repayment: req.body.repayment,
               service_charge: req.body.service_charge,
               received_amount: req.body.received_amount,
-              gst: req.body.gst
+              gst: req.body.gst,
+              month: req.body.month
             };
             
             const mydata = await UserForm.create(data);
@@ -130,7 +131,38 @@ const controller = () => {
             console.log(error);
             res.status(400).json({ message: "Bad request", success: false });
           }
-      }
+      },
+      getLoanAmount: async (req, res) => {
+        try {
+  
+          const mydata = await UserForm.findAll({
+            where: {
+              user_id: req.params.user_id,
+              deleted_at: null
+            },
+            attributes: [
+              "id",
+              "user_id",
+              "amount",
+              "month"
+            ],
+          });
+          if (!mydata.length) {
+            return res.status(502).json({ message: "No data found", success: false });
+          }
+  
+          res.status(200).json({
+            success: true,
+            message: "Data fetched successfully",
+            data: mydata,
+          });
+        } catch (error) {
+          console.log(error);
+          res
+            .status(400)
+            .json({ message: "Internal Server error", success: false });
+        }
+      },
     };
   };
   module.exports = controller;
