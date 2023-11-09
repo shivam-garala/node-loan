@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "05271c18-4033-4941-a868-0f8e4470e9a7",
+		"name": "Loan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26749735",
+		"_collection_link": "https://gold-station-209789.postman.co/workspace/VKJ-Workspace~b22977ff-cef1-46de-8903-16229c958df0/collection/26749735-05271c18-4033-4941-a868-0f8e4470e9a7?action=share&source=collection_link&creator=26749735"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mobile_number\": \"7874112297\",\r\n    \"password\": \"DM@12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mobile_number\": \"8200667125\",\r\n    \"password\": \"Dhyey@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add form",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"amount\": 200000,\r\n    \"disbursal\": 200000,\r\n    \"interest\": 12000,\r\n    \"repayment\": 209500,\r\n    \"service_charge\": 2500,\r\n    \"received_amount\": 2000,\r\n    \"gst\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addForm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addForm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Loan Amount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://342e-2402-a00-401-6a90-8152-3474-7a23-3467.ngrok-free.app//loanAmount/4",
+					"protocol": "https",
+					"host": [
+						"342e-2402-a00-401-6a90-8152-3474-7a23-3467",
+						"ngrok-free",
+						"app"
+					],
+					"path": [
+						"",
+						"loanAmount",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

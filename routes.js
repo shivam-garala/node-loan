@@ -17,6 +17,11 @@ Router.post(
   );
 
 Router.post("/createUser",  [
+    /* body("name").custom((value) => {
+      if (!value) {
+        return Promise.reject("Enter name");
+      }  
+    }), */
     body("mobile_number").custom((value) => {
       if (!value) {
         return Promise.reject("Enter mobile number");

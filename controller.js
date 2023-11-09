@@ -76,6 +76,7 @@ const controller = () => {
               const salt = await bcrypt.genSalt(10);
               const securedPassword = await bcrypt.hash(req.body.password, salt);
               const data = {
+                name: req.body.name.trim(),
                 mobile_number: req.body.mobile_number.trim(),
                 password: securedPassword,
               };
@@ -88,7 +89,10 @@ const controller = () => {
                 .json({
                   success: true,
                   message: "User created successfully",
-                  data: { mobile_number: mydata.mobile_number },
+                  data: {
+                    name: mydata.name,
+                    mobile_number: mydata.mobile_number,
+                  },
                 });
             } catch (error) {
               console.log(error);
