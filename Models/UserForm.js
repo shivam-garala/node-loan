@@ -12,7 +12,9 @@ const UserForm = sequelize.define("user_forms", {
   received_amount: { type: Sequelize.DECIMAL(8,2), allowNull: true },
   gst: { type: Sequelize.DECIMAL(8,2), allowNull: true },
   deleted_at: { type: Sequelize.STRING, allowNull: true },
-  month: {type: Sequelize.INTEGER, allowNull: true }
+  month: {type: Sequelize.INTEGER, allowNull: true },
+  aadhaar_number: {type: Sequelize.STRING(50), allowNull: true},
+  pan_number: {type: Sequelize.STRING(50), allowNull: true}
 },
   {
     timestamps: false,

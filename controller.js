@@ -118,7 +118,9 @@ const controller = () => {
               service_charge: req.body.service_charge,
               received_amount: req.body.received_amount,
               gst: req.body.gst,
-              month: req.body.month
+              month: req.body.month,
+              aadhaar_number : req.body.aadhaar_number,
+              pan_number : req.body.pan_number
             };
             
             const mydata = await UserForm.create(data);
