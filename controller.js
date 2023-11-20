@@ -139,7 +139,7 @@ const controller = () => {
       getLoanAmount: async (req, res) => {
         try {
   
-          const mydata = await UserForm.findAll({
+          const mydata = await UserForm.findOne({
             where: {
               user_id: req.params.user_id,
               deleted_at: null
@@ -151,7 +151,7 @@ const controller = () => {
               "month"
             ],
           });
-          if (!mydata.length) {
+          if (!mydata) {
             return res.status(502).json({ message: "No data found", success: false });
           }
   
