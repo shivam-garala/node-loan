@@ -154,7 +154,7 @@ const controller = () => {
             ],
           });
           if (!mydata) {
-            return res.status(502).json({ message: "No data found", success: false });
+            return res.status(400).json({ message: "No data found", success: false });
           }
   
           res.status(200).json({
