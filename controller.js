@@ -120,7 +120,24 @@ const controller = () => {
               gst: req.body.gst,
               month: req.body.month,
               aadhaar_number : req.body.aadhaar_number,
-              pan_number : req.body.pan_number
+              pan_number : req.body.pan_number,
+              first_name : req.body.first_name,
+              last_name : req.body.last_name,
+              email : req.body.email,
+              mobile_number : req.body.mobile_number,
+              birth_date : req.body.birth_date,
+              gender : req.body.gender,
+              address : req.body.address,
+              city : req.body.city,
+              state : req.body.state,
+              country : req.body.country,
+              pincode : req.body.pincode,
+              monthly_income : req.body.monthly_income,
+              profession : req.body.profession,
+              bank_name : req.body.bank_name,
+              account_holder_name : req.body.account_holder_name,
+              account_number : req.body.account_number,
+              ifsc_code : req.body.ifsc_code,
             };
             
             const mydata = await UserForm.create(data);
