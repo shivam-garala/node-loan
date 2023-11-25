@@ -11,7 +11,7 @@ Router.post(
     [
       body("mobile_number", "Mobile number can not be blank").exists(),
   
-      body("password", "Password can not be blank").exists()
+      // body("password", "Password can not be blank").exists()
     ],
     controller().userLogin
   );

@@ -25,21 +25,21 @@ const controller = () => {
                     success: false
                   });
                 }
-                const { mobile_number, password } = req.body;
+                const { mobile_number } = req.body;
                 let user = await User.findOne({ where: { mobile_number } });
                 if (!user) {
                   return res.status(400).json({
                     success: false,
-                    message: "You have not registered with this mobile number. Please contact your administrator.",
+                    message: "You have not registered with this mobile number",
                   });
                 }
-                const comparePassword = await bcrypt.compare(password, user.dataValues.password);
-                if (!comparePassword) {
-                  return res.status(400).json({
-                    success: false,
-                    message: "Please enter valid password",
-                  });
-                }
+                // const comparePassword = await bcrypt.compare(password, user.dataValues.password);
+                // if (!comparePassword) {
+                //   return res.status(400).json({
+                //     success: false,
+                //     message: "Please enter valid password",
+                //   });
+                // }
                 const data = {
                   user: {
                     id: user.id,
@@ -73,8 +73,11 @@ const controller = () => {
                 });
                 return res.status(409).json({ error, success: false });
               }
-              const salt = await bcrypt.genSalt(10);
-              const securedPassword = await bcrypt.hash(req.body.password, salt);
+              let securedPassword;
+              if (req.body.password) {
+                const salt = await bcrypt.genSalt(10);
+                securedPassword = await bcrypt.hash(req.body.password, salt);
+              }
               const data = {
                 name: req.body.name.trim(),
                 mobile_number: req.body.mobile_number.trim(),
