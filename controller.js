@@ -27,19 +27,12 @@ const controller = () => {
                 }
                 const { mobile_number } = req.body;
                 let user = await User.findOne({ where: { mobile_number } });
+                
+
                 if (!user) {
-                  return res.status(400).json({
-                    success: false,
-                    message: "You have not registered with this mobile number",
-                  });
+                  user = await User.create({ mobile_number })
                 }
-                // const comparePassword = await bcrypt.compare(password, user.dataValues.password);
-                // if (!comparePassword) {
-                //   return res.status(400).json({
-                //     success: false,
-                //     message: "Please enter valid password",
-                //   });
-                // }
+      
                 const data = {
                   user: {
                     id: user.id,
@@ -49,7 +42,9 @@ const controller = () => {
                 const authToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '24h' });
 
                 // add user token
-                await User.update({ auth_token: authToken }, { where: { mobile_number } });
+             
+                await User.upsert({ id: user.id, auth_token: authToken, mobile_number });
+
                 res.cookie("authorization", `Bearer ${authToken}`).status(200).json({
                   success: true,
                   authToken,
