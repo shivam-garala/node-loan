@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require("express-validator");
 const UserForm = require('./Models/UserForm');
+const PaymentCredentials = require('./Models/PaymentCredentials');
 
 
 const controller = () => {
@@ -166,6 +167,35 @@ const controller = () => {
               "user_id",
               "amount",
               "month"
+            ],
+          });
+          if (!mydata) {
+            return res.status(400).json({ message: "No data found", success: false });
+          }
+  
+          res.status(200).json({
+            success: true,
+            message: "Data fetched successfully",
+            data: mydata,
+          });
+        } catch (error) {
+          console.log(error);
+          res
+            .status(400)
+            .json({ message: "Internal Server error", success: false });
+        }
+      },
+      getUpiCredentials: async (req, res) => {
+        try {
+  
+          const mydata = await PaymentCredentials.findOne({
+            where: {
+              deleted_at: null
+            },
+            attributes: [
+              "id",
+              "upi_id",
+              "merchant_name"
             ],
           });
           if (!mydata) {

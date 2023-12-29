@@ -69,4 +69,6 @@ Router.post("/addForm", [
 
 Router.get("/loanAmount/:user_id",  controller().getLoanAmount);
 
+Router.get("/upiCredentials",  controller().getUpiCredentials);
+
 module.exports = Router;
